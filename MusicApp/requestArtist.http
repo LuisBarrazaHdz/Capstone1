@@ -1,0 +1,38 @@
+GET localhost:8080/artist/holamundo
+###
+
+POST localhost:8080/artist
+Content-Type: application/json
+
+{"name": "Taylor Swift"}
+###
+
+POST localhost:8080/artist
+Content-Type: application/json
+
+{"name": "Vicente Fernandez"}
+###
+
+POST localhost:8080/artist
+Content-Type: application/json
+
+{"name": "Tigres del norte"}
+###
+
+DELETE localhost:8080/artist/1
+###
+
+PUT localhost:8080/artist
+Content-Type: application/json
+
+{"idArtist": 3,"name": "Los tigres del norte"}
+###
+
+GET localhost:8080/artist/getArtistById/2
+###
+
+GET localhost:8080/artist/getArtistByName/Taylor%20Swift
+###
+
+GET localhost:8080/artist/getAllArtists
+###

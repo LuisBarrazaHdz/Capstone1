@@ -1,0 +1,56 @@
+GET http://localhost:8080/track/holamundo
+###
+
+POST localhost:8080/track
+Content-Type: application/json
+
+{"title": "Karma is a cat", "album": "Lover", "artists":[{"idArtist": 1, "name": "Taylor Swift"}] ,"issueDate": "2024-04-23", "mediaType": "Mp3",
+  "duration": "00:02:30"
+}
+###
+
+POST localhost:8080/track
+Content-Type: application/json
+
+{"title": "La ruleta", "album": "Exitos de oro", "artists":[{"idArtist": 1, "name": "Vicente Fernandez"}] ,"issueDate": "2000-01-15", "mediaType": "Wav",
+  "duration": "00:03:10"
+}
+###
+
+POST localhost:8080/track
+Content-Type: application/json
+
+{"title": "La puerta negra", "album": "Exitos de oro", "artists":[{"idArtist": 1, "name": "Tigres del norte"}] ,"issueDate": "1995-05-18", "mediaType": "Wav",
+  "duration": "00:04:50"
+}
+###
+
+
+DELETE localhost:8080/track/1
+###
+
+PUT localhost:8080/track
+Content-Type: application/json
+
+{"idTrack": 3, "title": "La puerta negra", "album": "Exitos de oro 2023", "artists":[{"idArtist": 1, "name": "Tigres del norte"}] ,"issueDate": "1995-05-18", "mediaType": "Wav",
+  "duration": "00:04:50"
+}
+###
+
+GET localhost:8080/track/getTrackById/3
+###
+
+GET localhost:8080/track/getTracksByMediaType/Wav
+###
+
+GET localhost:8080/track/getTracksByYear/2000
+###
+
+GET localhost:8080/track/getTracksByArtist/1
+###
+
+GET localhost:8080/track/getTracksByDuration/Equal/00:03:10
+###
+
+
+
