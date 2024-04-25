@@ -20,6 +20,7 @@ public class Track {
     private LocalDate issueDate;
     private MediaType mediaType;
     private LocalTime duration;
+    private double price;
 
     @Override
     public String toString() {

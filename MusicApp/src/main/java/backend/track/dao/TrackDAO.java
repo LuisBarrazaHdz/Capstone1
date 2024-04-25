@@ -1,5 +1,6 @@
 package backend.track.dao;
 
+import backend.track.models.Artist;
 import backend.track.models.DurationType;
 import backend.track.models.MediaType;
 import backend.track.models.Track;
@@ -16,5 +17,6 @@ public interface TrackDAO {
     List<Track> getTracksByMediaType(MediaType mediaType);
     List<Track> getTracksByYear(int year);
     List<Track> getTracksByArtist(int idArtist);
+    List<Artist> getArtistByTrack(int idTrack);
     List<Track> getTracksByDuration(DurationType durationType, LocalTime duration);
 }

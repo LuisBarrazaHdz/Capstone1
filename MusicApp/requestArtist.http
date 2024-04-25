@@ -34,5 +34,8 @@ GET localhost:8080/artist/getArtistById/2
 GET localhost:8080/artist/getArtistByName/Taylor%20Swift
 ###
 
+GET localhost:8080/artist/getTracksByArtist/1
+###
+
 GET localhost:8080/artist/getAllArtists
 ###

@@ -8,15 +8,17 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="track" />
-        <module name="PriceApp" />
+        <module name="price" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="MusicApp" target="21" />
+      <module name="PriceApp" target="1.7" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="price" options="-parameters" />
       <module name="track" options="-parameters" />
     </option>
   </component>

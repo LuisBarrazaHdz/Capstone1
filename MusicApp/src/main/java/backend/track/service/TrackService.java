@@ -1,9 +1,11 @@
 package backend.track.service;
 
 import backend.track.dao.TrackDAO;
+import backend.track.models.Artist;
 import backend.track.models.DurationType;
 import backend.track.models.MediaType;
 import backend.track.models.Track;
+import backend.track.price.PriceProvider;
 import org.springframework.stereotype.Service;
 
 import java.sql.Time;
@@ -14,8 +16,11 @@ import java.util.List;
 public class TrackService {
     private TrackDAO trackDAO;
 
-    public TrackService(TrackDAO trackDAO) {
+    private PriceProvider priceProvider;
+
+    public TrackService(TrackDAO trackDAO, PriceProvider priceProvider) {
         this.trackDAO = trackDAO;
+        this.priceProvider = priceProvider;
     }
 
     public Track addTrack(Track track) {
@@ -31,22 +36,38 @@ public class TrackService {
     }
 
     public Track getTrackById(int idTrack) {
-        return trackDAO.getTrackById(idTrack);
+        Track track = trackDAO.getTrackById(idTrack);
+        if(track!=null)
+            priceProvider.addPriceToTrack(track);
+        return track;
     }
 
     public List<Track> getTracksByMediaType(MediaType mediaType) {
-        return trackDAO.getTracksByMediaType(mediaType);
+        List<Track> tracks = trackDAO.getTracksByMediaType(mediaType);
+        tracks.forEach(priceProvider::addPriceToTrack);
+        return tracks;
     }
 
     public List<Track> getTracksByYear(int year){
-        return trackDAO.getTracksByYear(year);
+        List<Track> tracks = trackDAO.getTracksByYear(year);
+        tracks.forEach(priceProvider::addPriceToTrack);
+        return tracks;
     }
 
     public List<Track> getTracksByArtist(int idArtist) {
-        return trackDAO.getTracksByArtist(idArtist);
+        List<Track> tracks = trackDAO.getTracksByArtist(idArtist);
+        tracks.forEach(priceProvider::addPriceToTrack);
+        return tracks;
+    }
+
+    public List<Artist> getArtistByTrack(int idTrack){
+        List<Artist> artists = trackDAO.getArtistByTrack(idTrack);
+        return artists;
     }
 
     public List<Track> getTracksByDuration(DurationType durationType, LocalTime duration) {
-        return  trackDAO.getTracksByDuration(durationType, duration);
+        List<Track> tracks = trackDAO.getTracksByDuration(durationType, duration);
+        tracks.forEach(priceProvider::addPriceToTrack);
+        return tracks;
     }
 }

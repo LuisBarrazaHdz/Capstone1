@@ -3,6 +3,7 @@ package backend.track.controller;
 import backend.track.models.Artist;
 import backend.track.models.Track;
 import backend.track.service.ArtistService;
+import backend.track.service.TrackService;
 import backend.track.utils.UriCreator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +16,13 @@ import java.util.List;
 @RequestMapping("/artist")
 public class ArtistController {
     private ArtistService artistService;
+
+    private TrackService trackService;
     private UriCreator uriCreator;
 
-    public ArtistController(ArtistService artistService, UriCreator uriCreator) {
+    public ArtistController(ArtistService artistService, TrackService trackService, UriCreator uriCreator) {
         this.artistService = artistService;
+        this.trackService = trackService;
         this.uriCreator = uriCreator;
     }
 
@@ -73,6 +77,12 @@ public class ArtistController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No found artist name: " + name);
         }
         return ResponseEntity.ok(artist);
+    }
+
+    @GetMapping("/getTracksByArtist/{idArtist}")
+    public ResponseEntity<?> getTracksByArtist(@PathVariable("idArtist") int idArtist) {
+        List<Track> tracks = trackService.getTracksByArtist(idArtist);
+        return ResponseEntity.ok(tracks);
     }
 
     @GetMapping("getAllArtists")

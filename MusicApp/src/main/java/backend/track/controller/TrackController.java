@@ -83,10 +83,10 @@ public class TrackController {
         return ResponseEntity.ok(tracks);
     }
 
-    @GetMapping("/getTracksByArtist/{idArtist}")
-    public ResponseEntity<?> getTracksByArtist(@PathVariable("idArtist") int idArtist) {
-        List<Track> tracks = trackService.getTracksByArtist(idArtist);
-        return ResponseEntity.ok(tracks);
+    @GetMapping("/getArtistByTrack/{idTrack}")
+    public ResponseEntity<?> getArtistByTrack(@PathVariable("idTrack") int idTrack) {
+        List<Artist> artists = trackService.getArtistByTrack(idTrack);
+        return ResponseEntity.ok(artists);
     }
 
     @GetMapping("/getTracksByDuration/{durationType}/{duration}")

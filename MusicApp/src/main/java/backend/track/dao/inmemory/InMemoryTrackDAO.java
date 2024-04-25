@@ -1,6 +1,7 @@
 package backend.track.dao.inmemory;
 
 import backend.track.dao.TrackDAO;
+import backend.track.models.Artist;
 import backend.track.models.DurationType;
 import backend.track.models.MediaType;
 import backend.track.models.Track;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Repository
@@ -57,6 +59,11 @@ public class InMemoryTrackDAO implements TrackDAO {
     @Override
     public List<Track> getTracksByArtist(int idArtist) {
         return new ArrayList<>(this.tracks.values()).stream().filter(f -> f.getArtists().stream().anyMatch(a -> a.getIdArtist()==idArtist)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Artist> getArtistByTrack(int idTrack) {
+        return this.tracks.values().stream().filter(f -> f.getIdTrack()==idTrack).map(Track::getArtists).findFirst().orElse(null);
     }
 
     @Override
