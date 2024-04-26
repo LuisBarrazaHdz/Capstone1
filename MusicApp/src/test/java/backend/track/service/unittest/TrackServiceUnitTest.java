@@ -29,8 +29,8 @@ public class TrackServiceUnitTest {
     @InjectMocks
     private TrackService trackService;
 
-    //@InjectMocks
-    //protected PriceProvider priceProvider;
+    @Mock
+    private PriceProvider priceProvider;
 
     private List<Track> inicialize() {
         List<Track> tracks = new ArrayList<>();
@@ -89,7 +89,7 @@ public class TrackServiceUnitTest {
     }
 
     @Test
-    public void updateTrackOk() {
+    public void updateTrackTestOk() {
         List<Track> tracks = inicialize();
 
         Mockito.when(trackDAO.updateTrack(tracks.get(1))).thenReturn(true);
@@ -100,10 +100,27 @@ public class TrackServiceUnitTest {
         Mockito.verify(trackDAO).updateTrack(tracks.get(1));
     }
 
-    /*
+    @Test
+    public void updateTrackTestFail() {
+        List<Track> tracks = inicialize();
+        tracks.get(0).setIdTrack(999);
+
+        Mockito.when(trackDAO.getTrackById(tracks.get(0).getIdTrack())).thenReturn(null);
+
+        boolean result = trackService.updateTrack(tracks.get(0));
+        assertFalse(result);
+
+        Mockito.verify(trackDAO).getTrackById(999);
+        Mockito.verify(trackDAO, Mockito.never()).updateTrack(tracks.get(0));
+    }
+
+
+
     @Test
     public void getTrackById() {
         List<Track> tracks = inicialize();
+
+        Mockito.doNothing().when(priceProvider).addPriceToTrack(Mockito.any(Track.class));
 
         Mockito.when(trackDAO.getTrackById(1)).thenReturn(tracks.get(1));
 
@@ -111,5 +128,5 @@ public class TrackServiceUnitTest {
         assertNotNull(result);
 
         Mockito.verify(trackDAO).getTrackById(1);
-    }*/
+    }
 }
